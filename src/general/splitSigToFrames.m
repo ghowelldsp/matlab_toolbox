@@ -7,7 +7,9 @@ function frameSigData = splitSigToFrames(sigData, frameLen, frameOverlap, debugI
 %         frameOverlap: percentage frame overlap
 %         debugInfo: prints debug info to console
 %
-% OUTPUTS: frameSigData: frame signal data after splitting
+% OUTPUTS: frameSigData: frame signal data after splitting, returns in the
+%                        format of (samples, frames) if single signal, else 
+%                        returns in format of (samples, signals, frames)
 %
 % EXAMPLES: splitSigToFrames(sigData, 1000, 10, true)
 %
@@ -47,6 +49,11 @@ for frameIdx=1:noFrames
     
     % split data
     frameSigData(:,:,frameIdx) = sigData(frameStartIdx:frameEndIdx, :);
+end
+
+% convert to 2d matrix if one signal
+if size(sigData,2)==1
+    frameSigData = reshape(frameSigData, frameLen, []);
 end
 
 % print info to console
