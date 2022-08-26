@@ -38,7 +38,7 @@ for n=1:length(x)
     end
     
     % decimation 
-    if (mod(n-1,decFac)==0)
+    if (mod(n,decFac)==0)
         w0 = v(order);
         for orderIdx=1:order
             y0 = w0 - w(orderIdx,delayFac);
