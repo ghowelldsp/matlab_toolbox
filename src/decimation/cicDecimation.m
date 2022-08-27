@@ -33,7 +33,7 @@ for n=1:length(x)
     % integrator stage
     v0 = x(n);
     for orderIdx=1:order
-        v(orderIdx) = v0 + v(orderIdx);
+        v(orderIdx) = intWrap(v0 + v(orderIdx), 'int32');
         v0 = v(orderIdx);
     end
     
@@ -41,7 +41,7 @@ for n=1:length(x)
     if (mod(n,decFac)==0)
         w0 = v(order);
         for orderIdx=1:order
-            y0 = w0 - w(orderIdx,delayFac);
+            y0 = intWrap(w0 - w(orderIdx,delayFac), 'int32')';
             w(orderIdx,1) = w0;
             w0 = y0;
         end
