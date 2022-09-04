@@ -50,7 +50,7 @@ for n=1:length(x)
         w = circshift(w,1,2);
 
         % comb filter stage
-        y(ceil(n/decFac)) = y0;
+        y(ceil(n/decFac),1) = y0;
     end   
 end
 
@@ -68,7 +68,7 @@ if debug
     bCoeffs(1) = 1;
     bCoeffs(decFac+1) = -1;
     
-    figure('WindowStyle','docked','NumberTitle','off','Name','Freq')
+    figure('WindowStyle','docked','NumberTitle','off','Name','CIC')
     freqz(bCoeffs,[1 -1],1028,fsIn)
 end
 
